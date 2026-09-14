@@ -27,8 +27,8 @@
 
 /* Base custom styles for premium editorial feel */
 body {
-  background-color: #030d17;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  color: #0F172A;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -48,4 +48,19 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes pulse-cta {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7), 0 8px 24px -4px rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    transform: scale(1.035);
+    box-shadow: 0 0 0 12px rgba(16, 185, 129, 0), 0 12px 30px -4px rgba(16, 185, 129, 0.6);
+  }
+}
+
+.animate-pulse-cta {
+  animation: pulse-cta 1.8s infinite ease-in-out;
 }

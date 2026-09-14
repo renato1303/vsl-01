@@ -25,11 +25,55 @@
     <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
     <link rel="preload" href="https://scripts.converteai.net/da948446-e37f-4a02-ad47-b15ab29871d1/players/6a8e0449107f2d3d63440b0b/v4/player.js" as="script">
     <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
-    <link rel="preload" href="https://cdn.converteai.net/da948446-e37f-4a02-ad47-b15ab29871d1/6a8e042ea213ca4758c49a76/main.m3u8" as="fetch">
     <link rel="dns-prefetch" href="https://cdn.converteai.net">
     <link rel="dns-prefetch" href="https://scripts.converteai.net">
     <link rel="dns-prefetch" href="https://images.converteai.net">
     <link rel="dns-prefetch" href="https://license.vturb.com">
+
+    <!-- Safe Network / Fetch Protection for Tracking & Adblockers -->
+    <script>
+      (function() {
+        // Intercept unhandled promise rejections so external tracking scripts failing network don't crash
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event && event.reason) {
+            var msg = (event.reason.message || event.reason.toString() || '').toLowerCase();
+            if (msg.indexOf('failed to fetch') !== -1 || msg.indexOf('networkerror') !== -1 || msg.indexOf('load failed') !== -1) {
+              event.preventDefault();
+              console.warn('[Tracking Network Handled]:', event.reason);
+            }
+          }
+        });
+
+        // Guard window.fetch against CORS/network blocks from third-party tracking/geo APIs
+        if (typeof window.fetch === 'function') {
+          var nativeFetch = window.fetch;
+          window.fetch = function(input, init) {
+            var url = '';
+            try {
+              url = typeof input === 'string' ? input : (input && input.url ? input.url : '');
+            } catch (e) {}
+
+            return nativeFetch.apply(this, arguments).catch(function(err) {
+              // If tracking or geo lookup service failed due to adblock, rate-limit or CORS
+              if (
+                url.indexOf('ipapi.co') !== -1 ||
+                url.indexOf('ipify.org') !== -1 ||
+                url.indexOf('utmify') !== -1 ||
+                url.indexOf('facebook') !== -1 ||
+                url.indexOf('tiktok') !== -1
+              ) {
+                console.warn('[Safe Fetch Fallback]:', url);
+                return new Response(JSON.stringify({}), {
+                  status: 200,
+                  headers: { 'Content-Type': 'application/json' }
+                });
+              }
+              throw err;
+            });
+          };
+        }
+      })();
+    </script>
 
     <!-- Circular JSON Protection for Tracking Scripts -->
     <script>
@@ -64,20 +108,6 @@
         };
       })();
     </script>
-    <!-- Meta Pixel Code -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1368552898825537');
-      fbq('track', 'PageView');
-    </script>
-    <!-- End Meta Pixel Code -->
     <!-- Utmify Scripts -->
     <script>
       // ALTERE O LINK PARA A PÁGINA QUE QUISER MOSTRAR QUANDO O USUÁRIO TENTAR SAIR
