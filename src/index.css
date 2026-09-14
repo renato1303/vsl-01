@@ -64,3 +64,12 @@ body {
 .animate-pulse-cta {
   animation: pulse-cta 1.8s infinite ease-in-out;
 }
+
+/* Suppress VTurb resume modal so video plays from 0:00 without blocker */
+vturb-resume,
+.resume {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

@@ -17,19 +17,28 @@ export default function Hero({ onOpenCheckout }: HeroProps) {
   const [showCta, setShowCta] = useState(false);
 
   useEffect(() => {
-    // 1. Check if user already unlocked the CTA in previous session or current session
-    const storedAlreadyShown = localStorage.getItem("metodo_pinguim_cta_unlocked");
-    if (storedAlreadyShown === "true") {
-      setShowCta(true);
-    } else {
-      // Set timer for 9 minutes (540s)
-      const timer = setTimeout(() => {
-        setShowCta(true);
-        localStorage.setItem("metodo_pinguim_cta_unlocked", "true");
-      }, DELAY_SECONDS * 1000);
-
-      return () => clearTimeout(timer);
+    // Purge any stored resume / end-of-video state so it never starts finished
+    try {
+      localStorage.removeItem("metodo_pinguim_cta_unlocked");
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const key = localStorage.key(i);
+        if (key && (key.includes("resume") || key.includes(PLAYER_ID) || key.includes("smartplayer"))) {
+          localStorage.removeItem(key);
+        }
+      }
+    } catch {
+      // ignore
     }
+
+    // Set timer for 9 minutes (540s)
+    const timer = setTimeout(() => {
+      setShowCta(true);
+      try {
+        localStorage.setItem("metodo_pinguim_cta_unlocked", "true");
+      } catch {}
+    }, DELAY_SECONDS * 1000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Listen for VTurb player timeupdate message events
