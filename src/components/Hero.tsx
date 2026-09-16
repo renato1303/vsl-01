@@ -5,7 +5,7 @@ interface HeroProps {
   onOpenCheckout: () => void;
 }
 
-const PLAYER_ID = "6a8e0449107f2d3d63440b0b";
+const PLAYER_ID = "6aa9d68d94f6c11851eff92c";
 const SCRIPT_URL = `https://scripts.converteai.net/da948446-e37f-4a02-ad47-b15ab29871d1/players/${PLAYER_ID}/v4/player.js`;
 const CHECKOUT_URL = "https://pay.cakto.com.br/35b69xb_1007417";
 
