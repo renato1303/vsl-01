@@ -14,8 +14,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col justify-center bg-white text-slate-900 selection:bg-amber-200 selection:text-slate-900 antialiased">
-      <main className="w-full flex-1 flex flex-col justify-center">
+    <div className="min-h-screen w-full flex flex-col bg-white text-slate-900 selection:bg-amber-200 selection:text-slate-900 antialiased">
+      <main className="w-full flex-1 flex flex-col">
         {/* BLOCO 1 - VENDER SOZINHO (Hero / Headline Principal + Player) */}
         <Hero onOpenCheckout={handleOpenCheckout} />
       </main>

@@ -88,17 +88,17 @@ export default function Hero({ onOpenCheckout }: HeroProps) {
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen flex flex-col justify-center items-center overflow-hidden bg-gradient-to-b from-white via-slate-50/50 to-white px-4 py-4 sm:py-8">
+    <section className="relative w-full pt-2 pb-6 sm:py-8 flex flex-col items-center overflow-hidden bg-gradient-to-b from-white via-slate-50/50 to-white px-4">
       {/* Subtle soft lighting in background */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-72 w-[600px] max-w-full rounded-full bg-amber-100/35 blur-[90px]" />
       <div className="absolute top-1/3 right-10 -z-10 h-60 w-60 rounded-full bg-sky-100/30 blur-[100px]" />
       
-      <div className="mx-auto max-w-4xl w-full flex flex-col items-center justify-center text-center">
+      <div className="mx-auto max-w-4xl w-full flex flex-col items-center text-center">
         <div className="flex flex-col items-center text-center space-y-3 sm:space-y-4 max-w-3xl w-full mx-auto fade-in-up">
           
           {/* Main Headline */}
-          <div className="px-2">
-            <h1 className="font-display text-lg sm:text-2xl md:text-3xl lg:text-[34px] font-extrabold tracking-tight text-slate-900 leading-snug sm:leading-tight max-w-3xl mx-auto">
+          <div className="px-1">
+            <h1 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-[34px] font-extrabold tracking-tight text-slate-900 leading-snug sm:leading-tight max-w-3xl mx-auto">
               Reduza a{" "}
               <span className="relative inline-block px-1 sm:px-1.5 py-0.5 mx-0.5">
                 <span className="relative z-10 text-slate-950 font-black">
